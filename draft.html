@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Employee Data Management</title>
+    
+   <!-- <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">-->
+
+  <!-- Added link to the jQuery Library--> 
+    <script src="https://code.jquery.com/jquery-2.2.3.js" integrity="sha256-laXWtGydpwqJ8JA+X9x2miwmaiKhn8tVmOVEigRNtP4=" crossorigin="anonymous"></script>
+    
+    <script src="https://www.gstatic.com/firebasejs/3.5.3/firebase.js"></script>
+
+    <!-- Added a link to Bootstrap-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    
+    <style type="text/css">
+        .jumbotron{
+            background-color: black;
+            color: white;
+        }
+        
+        .panel-heading{
+            background-color:blue;
+        }
+        
+        .panel-heading{
+            background-color:blue;
+        }
+    
+    
+    
+    </style>
+    
+
+</head>
+<body>
+    
+    <div class="jumbotron">
+        <div class = "text-center">
+            <h1>Anytime Is Train Time</h1>
+            <p>Choo Choo Chee Chee</p>
+        </div>
+    </div>
+    
+    <div class="panel panel-default">
+  <!-- Default panel contents -->
+  <div class="panel-heading">Current Train Schedule</div>
+
+  <!-- Train Schedule -->
+        
+    <div class ="table_container">
+        <table class="table">
+             <tr>
+                <th>Train Name</th>
+                <th>Destination</th> 
+                <th>Frequency</th>
+                <th>Next Arrival</th>
+            <th>Minutes Away</th>
+            </tr>
+        </table>
+    </div>
+    
+
+<!--input form-->
+   
+<div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title"><strong>Add Employee</strong></h3>
+				</div>
+				<div class="panel-body">
+	
+
+				<!-- Entry Form -->
+				<form>
+					<div class="form-group">
+						<label for="">Train Name</label>
+						<input type="text" class="form-control" id="nameInput">
+					</div>
+
+					<div class="form-group">
+						<label for="">Destination</label>
+						<input type="text" class="form-control" id="destInput">
+					</div>
+
+					<div class="form-group">
+						<label for="">First Train Time (HH:mm)</label>
+						<input type="text" class="form-control" id="startInput">
+					</div>
+
+					<div class="form-group">
+						<label for="">Frequency</label>
+						<input type="text" class="form-control" id="freqInput">
+					</div>
+					
+					<button type="submit" class="btn btn-primary" id="addEmployeeBtn">Submit</button>
+				</form>
+
+				</div>
+			</div>
+
+		</div>
+	</div>
+</div>
+ 
+
+<script type="text/javascript">
+
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAkBTInxF6N7Pwq5h-6zGfFIcNAkw5IvSQ",
+    authDomain: "train-schedule-41045.firebaseapp.com",
+    databaseURL: "https://train-schedule-41045.firebaseio.com",
+    storageBucket: "train-schedule-41045.appspot.com",
+    messagingSenderId: "1001300063004"
+  };
+  firebase.initializeApp(config);
+
+//get a reference to the database service
+    var database = firebase.database();
+    
+// 2. button for adding 
+    $("#addTrainBtn").on("click",function(){
+        
+     //grabbing user input
+        
+        var tranName = $("#nameInput").val().trim();
+         var trainDes = $("#desInput").val().trim();
+        var firstTrain= moment($("#startInput").val().trim(),"HH/MM").format("X");
+        //what is moment????!!!!!!!!
+        var trainFreq = $("#freqInput").val().trim();       
+    
+    //create local temporary object for holding train data
+    
+    var newTrain ={
+        name: trainName,
+        destination: trainDestination,
+        start: trainStart,
+        frequency:trainFreq
+    }
+    
+    //upload train data to database
+    database.ref().push(newTrain);
+    
+    //log everything to console
+    console.log(newTrain.name);
+    console.log(newTrain.destination);
+    console.log(newTrain.start);
+    console.log(newTrain.frequency);
+        
+    });  
+
+
+
+</script>
+    
+             
+</body>
+</html>
+

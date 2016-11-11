@@ -1,0 +1,34 @@
+      
+        
+    html {
+        box-sizing: border-box;
+        outline: none;
+
+        *, *:before, *:after {
+        box-sizing: inherit;
+
+        &:focus {
+        outline: inherit;
+          }
+        }
+      }
+        
+            
+       
+    <style type="text/css">
+        .jumbotron{
+            background-color: black;
+            color: white;
+        }
+        
+        .panel-heading{
+            background-color:blue;
+        }
+        
+        .panel-heading{
+            background-color:blue;
+        }
+    
+    
+    
+    
